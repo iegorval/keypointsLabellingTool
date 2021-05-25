@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <title>Keypoints Labelling Tool</title>
+        <link rel="stylesheet" href="css/styles.css">
+        <script type="text/javascript" src="scripts/keypoints.js"></script>
+    </head>
+
+    <body>
+        <div class="sidenav">
+           <h1>Keypoints</h1>
+           <button class="keypointsButton" onclick="resetAllKeypoints()">Reset All Keypoints</button>
+           <ul>
+            <li id="left_front_list">
+                <span class="categoryLabel"><p>Left front</p></span>
+                <ul class="keypointsList">
+                    <li>Hoof</li>
+                    <li>Dewclaw</li>
+                    <li>Knee</li>
+                    <li>Elbow</li>
+                    <li>Shoulder blade</li>
+                </ul>
+            </li>
+            <li id="right_front_list">
+                <span class="categoryLabel"><p>Right front</p></span>
+                <ul class="keypointsList">
+                    <li>Hoof</li>
+                    <li>Dewclaw</li>
+                    <li>Knee</li>
+                    <li>Elbow</li>
+                    <li>Shoulder blade</li>
+                </ul>
+            </li>
+            <li id="left_back_list">
+                <span class="categoryLabel"><p>Left back</p></span>
+                <ul class="keypointsList">
+                    <li>Hoof</li>
+                    <li>Cannon</li>
+                    <li>Hock</li>
+                    <li>Thigh</li>
+                    <li>Thurl</li>
+                </ul>
+            </li>
+            <li id="right_back_list">
+                <span class="categoryLabel"><p>Right back</p></span>
+                <ul class="keypointsList">
+                    <li>Hoof</li>
+                    <li>Cannon</li>
+                    <li>Hock</li>
+                    <li>Thigh</li>
+                    <li>Thurl</li>
+                </ul>
+            </li>
+            <li id="body_head_list">
+                <span class="categoryLabel"><p>Body and head</p></span>
+                <ul class="keypointsList">
+                    <li>Left eye</li>
+                    <li>Right eye</li>
+                    <li>Nose</li>
+                    <li>Chin</li>
+                    <li>Neck</li>
+                    <li>Tail start</li>
+                </ul>
+            </li>
+           </ul>
+        </div>
+
+        <div class="main">
+            <div class="canvasContainer">
+                <canvas id="canvas_image" class="canvasImage"></canvas>
+                <div id="keypoints_div" class="keypointsContainer" 
+                     oncontextmenu="addInvisibleKeypoint(event);" onclick="addVisibleKeypoint(event);"></div>
+            </div>
+            
+            <div style="display:none">
+                <img 
+                    id="img_labeling" 
+                    class="imgLabeling" 
+                    src="https://cdn.britannica.com/55/174255-050-526314B6/brown-Guernsey-cow.jpg"
+                />
+            </div> 
+        </div>
+        
+    </body>
+</html>
