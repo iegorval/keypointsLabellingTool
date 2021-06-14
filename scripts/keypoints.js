@@ -1,15 +1,16 @@
-var keypoints; var curCategoryKeypoints; var curCategoryIdx; var curKeypointNames;
+var keypoints; var curCategoryKeypoints; var curCategoryIdx; var NUM_KEYPOINTS = 30; var d;
 var keypointCategories = [
-    "left_front_list", "right_front_list", "left_back_list", "right_back_list", "body_head_list"
+    "left_front_list", "right_front_list", "left_back_list", "right_back_list", "body_list", "head_list"
 ];
 var allKeypointNames = [
-    "hoof", "dewclaw", "knee", "elbow", "shoulder blade", 
-    "hoof", "dewclaw", "knee", "elbow", "shoulder blade",
-    "hoof", "cannon", "hock", "thigh", "thurl",
-    "hoof", "cannon", "hock", "thigh", "thurl",
-    "left eye", "right eye", "nose", "chin", "neck", "tail start"
+    "hoof", "pastern", "knee", "elbow", "shoulder blade", 
+    "hoof", "pastern", "knee", "elbow", "shoulder blade",
+    "hoof", "pastern", "hock", "stifle", "pin bone", "hip bone",
+    "hoof", "pastern", "hock", "stifle", "pin bone", "hip bone",
+    "tailhead", "udder teats", "ribs start", "neck",
+    "left eye", "right eye", "nose", "chin"
 ];
-var colorList = ["#ff0000", "#77b300", "#0000ff", "#ff99ff", "#81d8d0"];
+var colorList = ["#ff0000", "#0000ff", "#ff7e00", "#ff99ff", "#81d8d0", "#77b300"];
 var removedKeypoint;
 
 window.addEventListener("DOMContentLoaded", function() {
@@ -42,6 +43,10 @@ window.addEventListener("DOMContentLoaded", function() {
 
 function removeKeypoint(keypoint, label) {
     if (removedKeypoint.length == 0) {
+        if (keypoints.length === NUM_KEYPOINTS) {
+            var sendButton = document.getElementById("send_button");
+            sendButton.disabled = true;
+        }
         var lastRemovedIdx = label.title.split(" ")[0];
         keypoints.splice(lastRemovedIdx, 1);
         removedKeypoint.push(label.title);
@@ -110,6 +115,9 @@ function addKeypoint(x, y, vis) {
             if (nextCategory !== null) {
                 var nextLabel = nextCategory.getElementsByTagName("p")[0];
                 nextLabel.classList.add("activeKeypoint");
+            } else {
+                var sendButton = document.getElementById("send_button");
+                sendButton.disabled = false;
             }
         }
     }
@@ -159,4 +167,9 @@ function toggleLabelsVisibility() {
             }
         }
     }
+}
+
+function submitResults() {
+    console.log("Submitting results...");
+    console.log(keypoints);
 }
