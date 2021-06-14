@@ -53,7 +53,9 @@ function removeKeypoint(keypoint, label) {
 function processKeypointsArray(x, y, vis, label) {
     var curCategoryIdxModified = curCategoryIdx;
     if (removedKeypoint.length == 0) {
-        keypoints.push([x, y, vis]);
+        keypoints.push({
+            "x": x, "y": y, "vis": vis   
+        });
         label.title = (keypoints.length - 1) + " " + curCategoryIdx;
         label.innerHTML = allKeypointNames[keypoints.length - 1];
         if (!vis) label.innerHTML = label.innerHTML + " (invisible)";
