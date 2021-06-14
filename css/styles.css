@@ -1,7 +1,7 @@
 /* The sidebar menu */
 .sidenav {
     height: 100%; /* Full-height: remove this if you want "auto" height */
-    width: 200px; /* Set the width of the sidebar */
+    width: 390px; /* Set the width of the sidebar */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     z-index: 1; /* Stay on top */
     top: 0; /* Stay at the top */
@@ -28,6 +28,7 @@
 
 .keypointsList {
     color: rgba(241, 241, 241, 0.3);
+    list-style: disc;
 }
 
 .categoryLabel {
@@ -45,7 +46,7 @@
 
 /* Style page content */
 .main {
-    margin-left: 210px; /* Same as the width of the sidebar */
+    margin-left: 400px; /* Same as the width of the sidebar */
     padding: 0px 10px;
 }
 
@@ -75,19 +76,26 @@ canvas{
 .canvasImage{
     z-index: 1;
     cursor: crosshair;
-    position: absolute;
+    position: relative;
     border: 1px solid black;
 }
 
 .keypointsContainer{
     z-index: 2;
     position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
     cursor: crosshair;
 }
 
 .keypointsButton{
     width: 90%;
     height: 30px;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: black;
 }
 
 .keypoint {
@@ -107,3 +115,66 @@ canvas{
     border: 1px solid black;
     color:rgb(32, 32, 32);
 }
+
+ /* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 20px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: rgb(98, 98, 98);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px rgb(98, 98, 98);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 24px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+} 

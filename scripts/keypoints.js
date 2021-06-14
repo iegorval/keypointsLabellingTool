@@ -16,6 +16,13 @@ window.addEventListener("DOMContentLoaded", function() {
     var image  = document.getElementById("img_labeling");
     var canvasImage = document.getElementById("canvas_image");
     var keypointsDiv = document.getElementById("keypoints_div");
+    var resetButton = document.getElementById("reset_button");
+    var toggleCheckbox = document.getElementById("switch_visibility");
+    keypointsDiv.addEventListener("click", addVisibleKeypoint);
+    keypointsDiv.addEventListener("contextmenu", addInvisibleKeypoint);
+    resetButton.addEventListener("click", resetAllKeypoints);
+    toggleCheckbox.addEventListener("click", toggleLabelsVisibility);
+
     keypoints = []; removedKeypoint = [];
     curCategoryKeypoints = 0; curCategoryIdx = 0;
     image.onload = function() {
@@ -63,10 +70,16 @@ function processKeypointsArray(x, y, vis, label) {
 }
 
 function addKeypointToHtml(x, y, vis, label, categoryIdx) {
+    var toggleCheckbox = document.getElementById("switch_visibility");
     var keypoint = document.createElement("span");
     label.classList.add("keypointLabel");
     label.style.left = x + 11;
     label.style.top = y + 11;
+    if (!toggleCheckbox.checked) {
+        label.style.visibility = 'visible';
+    } else {
+        label.style.visibility = 'hidden';
+    }
     keypoint.classList.add("keypoint");
     keypoint.style.backgroundColor = colorList[categoryIdx];
     if (vis) keypoint.style.opacity = 1.0;
@@ -115,7 +128,7 @@ function addVisibleKeypoint(event) {
 
 function resetAllKeypoints() {
     keypoints = [];
-    for (var categoryIdx = 0; categoryIdx <= Math.min(curCategoryIdx, keypointCategories.length); categoryIdx++) {
+    for (var categoryIdx = 0; categoryIdx <= Math.min(curCategoryIdx, keypointCategories.length-1); categoryIdx++) {
         var category = document.getElementById(keypointCategories[categoryIdx]);
         category.classList.remove("activeKeypoint");
         var curKeypoints = category.getElementsByTagName("li");
@@ -129,4 +142,19 @@ function resetAllKeypoints() {
     curCategoryKeypoints = 0;
     var keypointsDiv = document.getElementById("keypoints_div");
     keypointsDiv.innerHTML = "";
+}
+
+function toggleLabelsVisibility() {
+    var keypointsDiv = document.getElementById("keypoints_div");
+    var kp = keypointsDiv.children;
+    var toggleCheckbox = document.getElementById("switch_visibility");
+    for (var i = 0; i < kp.length; i++) {
+        if (kp[i].classList.item(0) === "keypointLabel") {
+            if (!toggleCheckbox.checked) {
+                kp[i].style.visibility = 'visible';
+            } else {
+                kp[i].style.visibility = 'hidden';
+            }
+        }
+    }
 }

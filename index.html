@@ -7,60 +7,73 @@
 
     <body>
         <div class="sidenav">
-           <h1>Keypoints</h1>
-           <button class="keypointsButton" onclick="resetAllKeypoints()">Reset All Keypoints</button>
-           <ul>
-            <li id="left_front_list">
-                <span class="categoryLabel"><p>Left front</p></span>
-                <ul class="keypointsList">
-                    <li>Hoof</li>
-                    <li>Dewclaw</li>
-                    <li>Knee</li>
-                    <li>Elbow</li>
-                    <li>Shoulder blade</li>
-                </ul>
-            </li>
-            <li id="right_front_list">
-                <span class="categoryLabel"><p>Right front</p></span>
-                <ul class="keypointsList">
-                    <li>Hoof</li>
-                    <li>Dewclaw</li>
-                    <li>Knee</li>
-                    <li>Elbow</li>
-                    <li>Shoulder blade</li>
-                </ul>
-            </li>
-            <li id="left_back_list">
-                <span class="categoryLabel"><p>Left back</p></span>
-                <ul class="keypointsList">
-                    <li>Hoof</li>
-                    <li>Cannon</li>
-                    <li>Hock</li>
-                    <li>Thigh</li>
-                    <li>Thurl</li>
-                </ul>
-            </li>
-            <li id="right_back_list">
-                <span class="categoryLabel"><p>Right back</p></span>
-                <ul class="keypointsList">
-                    <li>Hoof</li>
-                    <li>Cannon</li>
-                    <li>Hock</li>
-                    <li>Thigh</li>
-                    <li>Thurl</li>
-                </ul>
-            </li>
-            <li id="body_head_list">
-                <span class="categoryLabel"><p>Body and head</p></span>
-                <ul class="keypointsList">
-                    <li>Left eye</li>
-                    <li>Right eye</li>
-                    <li>Nose</li>
-                    <li>Chin</li>
-                    <li>Neck</li>
-                    <li>Tail start</li>
-                </ul>
-            </li>
+            <h1>Cow Keypoints</h1>
+            <button id="reset_button" class="keypointsButton">Reset all keypoints / Сбросить все точки</button>
+            <label class="switch">
+                <input id="switch_visibility" type="checkbox">
+                <span class="slider round"></span>
+            </label> Toggle visibility of labels / Спрятать подписи
+            <ul>
+               <li id="left_front_list">
+                    <span class="categoryLabel"><p>Left front / Левая передняя конечность</p></span>
+                    <ul class="keypointsList">
+                        <li>Hoof / Копыто</li>
+                        <li>Pastern / Путовой сустав</li>
+                        <li>Knee / Запястье</li>
+                        <li>Elbow / Локоть</li>
+                        <li>Shoulder blade / Лопатка</li>
+                    </ul>
+                </li>
+                <li id="right_front_list">
+                    <span class="categoryLabel"><p>Right front / Правая передняя конечность</p></span>
+                    <ul class="keypointsList">
+                        <li>Hoof / Копыто</li>
+                        <li>Pastern / Путовой сустав</li>
+                        <li>Knee / Запястье</li>
+                        <li>Elbow / Локоть</li>
+                        <li>Shoulder blade / Лопатка</li>
+                    </ul>
+                </li>
+                <li id="left_back_list">
+                    <span class="categoryLabel"><p>Left back / Левая задняя конечность</p></span>
+                    <ul class="keypointsList">
+                        <li>Hoof / Копыто</li>
+                        <li>Pastern / Путовой сустав</li>
+                        <li>Hock / Скакательный сустав</li>
+                        <li>Stifle / Колено</li>
+                        <li>Pin bone / Седалищный бугор</li>
+                        <li>Hip bone / Маклок (бедро)</li>
+                    </ul>
+                </li>
+                <li id="right_back_list">
+                    <span class="categoryLabel"><p>Right back / Правая задняя конечность</p></span>
+                    <ul class="keypointsList">
+                        <li>Hoof / Копыто</li>
+                        <li>Pastern / Путовой сустав</li>
+                        <li>Hock / Скакательный сустав</li>
+                        <li>Stifle / Колено</li>
+                        <li>Pin bone / Седалищный бугор</li>
+                        <li>Hip bone / Маклок (бедро)</li>
+                    </ul>
+                </li>
+                <li id="body_list">
+                    <span class="categoryLabel"><p>Body / Тело</p></span>
+                    <ul class="keypointsList">
+                        <li>Tailhead / Крестец</li>
+                        <li>Udder teats / Соски</li>
+                        <li>Ribs start / Начало ребер</li>
+                        <li>Neck / Середина шеи</li>
+                    </ul>
+                </li>
+                <li id="head_list">
+                    <span class="categoryLabel"><p>Head / Голова</p></span>
+                    <ul class="keypointsList">
+                        <li>Left eye / Левый глаз</li>
+                        <li>Right eye / Правый глаз</li>
+                        <li>Nose / Нос</li>
+                        <li>Chin / Подбородок</li>
+                    </ul>
+                </li>
            </ul>
         </div>
 
@@ -75,7 +88,7 @@
                 <img 
                     id="img_labeling" 
                     class="imgLabeling" 
-                    src="https://cdn.britannica.com/55/174255-050-526314B6/brown-Guernsey-cow.jpg"
+                    src="https://cdn.pixabay.com/photo/2016/01/19/15/16/cow-1149204_960_720.jpg"
                 />
             </div> 
         </div>
