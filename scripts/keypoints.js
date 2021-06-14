@@ -69,9 +69,12 @@ function processKeypointsArray(x, y, vis, label) {
         var lastRemoved = removedKeypoint.pop()
         var lastRemovedIdx = lastRemoved.split(" ")[0];
         curCategoryIdxModified = lastRemoved.split(" ")[1];
-        keypoints.splice(lastRemovedIdx, 0, [x, y, vis]);
+        keypoints.splice(lastRemovedIdx, 0, {
+            "x": x, "y": y, "vis": vis   
+        });
         label.title = lastRemoved;
         label.innerHTML = allKeypointNames[lastRemovedIdx];
+        if (!vis) label.innerHTML = label.innerHTML + " (invisible)";
     }   
     return curCategoryIdxModified;
 }
@@ -101,24 +104,28 @@ function addKeypointToHtml(x, y, vis, label, categoryIdx) {
 }
 
 function addKeypoint(x, y, vis) {
-    if (curCategoryIdx < keypointCategories.length) {
-        var curKeypoints = document.getElementById(keypointCategories[curCategoryIdx]).getElementsByTagName("li");
+    if (curCategoryIdx < keypointCategories.length || removedKeypoint.length > 0) {
+        var substitutingRemoved = removedKeypoint.length > 0;
         var label = document.createElement("label");
         var categoryIdx = processKeypointsArray(x, y, vis, label);
         addKeypointToHtml(x, y, vis, label, categoryIdx);
-        var nextKeypoint = curKeypoints[curCategoryKeypoints - 1];
-        nextKeypoint.classList.add("activeKeypoint");
-        if (curCategoryKeypoints == curKeypoints.length) { 
-            curCategoryKeypoints = 0; 
-            curCategoryIdx += 1; 
-            var nextCategory = document.getElementById(keypointCategories[curCategoryIdx]); 
-            if (nextCategory !== null) {
-                var nextLabel = nextCategory.getElementsByTagName("p")[0];
-                nextLabel.classList.add("activeKeypoint");
-            } else {
-                var sendButton = document.getElementById("send_button");
-                sendButton.disabled = false;
+        if (!substitutingRemoved) {
+            var curKeypoints = document.getElementById(keypointCategories[curCategoryIdx]).getElementsByTagName("li");
+            var nextKeypoint = curKeypoints[curCategoryKeypoints - 1];
+            nextKeypoint.classList.add("activeKeypoint");
+            if (curCategoryKeypoints == curKeypoints.length) { 
+                curCategoryKeypoints = 0; 
+                curCategoryIdx += 1; 
+                var nextCategory = document.getElementById(keypointCategories[curCategoryIdx]); 
+                if (nextCategory !== null) {
+                    var nextLabel = nextCategory.getElementsByTagName("p")[0];
+                    nextLabel.classList.add("activeKeypoint");
+                } 
             }
+        }
+        if (keypoints.length === NUM_KEYPOINTS) {
+            var sendButton = document.getElementById("send_button");
+            sendButton.disabled = false;
         }
     }
 }
@@ -137,7 +144,9 @@ function addVisibleKeypoint(event) {
 }
 
 function resetAllKeypoints() {
-    keypoints = [];
+    var sendButton = document.getElementById("send_button");
+    sendButton.disabled = true;
+    keypoints = []; removedKeypoint = [];
     for (var categoryIdx = 0; categoryIdx <= Math.min(curCategoryIdx, keypointCategories.length-1); categoryIdx++) {
         var category = document.getElementById(keypointCategories[categoryIdx]);
         category.classList.remove("activeKeypoint");
